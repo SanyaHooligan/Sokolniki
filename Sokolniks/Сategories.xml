@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<ArrayOfСategory xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Сategory>
+    <type>InParkEntertainment</type>
+    <priority>0</priority>
+    <Name>Развлечения в парке</Name>
+  </Сategory>
+  <Сategory>
+    <type>ObjectForKids</type>
+    <priority>0</priority>
+    <Name>Объекты для детей</Name>
+  </Сategory>
+  <Сategory>
+    <type>ObjectForOlds</type>
+    <priority>0</priority>
+    <Name>Объекты для пожилых</Name>
+  </Сategory>
+  <Сategory>
+    <type>SpotsObject</type>
+    <priority>0</priority>
+    <Name>Спортивные объекты</Name>
+  </Сategory>
+  <Сategory>
+    <type>CafeAndRestaurants</type>
+    <priority>0</priority>
+    <Name>Кафе и рестораны</Name>
+  </Сategory>
+  <Сategory>
+    <type>NaturalArea</type>
+    <priority>0</priority>
+    <Name>Природные зоны</Name>
+  </Сategory>
+  <Сategory>
+    <type>ParkingPlace</type>
+    <priority>0</priority>
+    <Name>Места парковки</Name>
+  </Сategory>
+  <Сategory>
+    <type>Variety</type>
+    <priority>0</priority>
+    <Name>Эстрады</Name>
+  </Сategory>
+  <Сategory>
+    <type>OpportunitiesForSelfDevelopment</type>
+    <priority>0</priority>
+    <Name>Возможности для саморазвития</Name>
+  </Сategory>
+  <Сategory>
+    <type>FacilitiesForDisabledGuests</type>
+    <priority>0</priority>
+    <Name>Услуги для инвалидов</Name>
+  </Сategory>
+  <Сategory>
+    <type>SportsGrounds</type>
+    <priority>0</priority>
+    <Name>Спортплощадки</Name>
+  </Сategory>
+  <Сategory>
+    <type>GeneralPurposeObjects</type>
+    <priority>0</priority>
+    <Name>Объекты общего назначения</Name>
+  </Сategory>
+  <Сategory>
+    <type>RentalPoints</type>
+    <priority>0</priority>
+    <Name>Пункты проката</Name>
+  </Сategory>
+  <Сategory>
+    <type>ExtrimeZone</type>
+    <priority>0</priority>
+    <Name>Экстрим-зоны</Name>
+  </Сategory>
+  <Сategory>
+    <type>ParkingForVisitors</type>
+    <priority>0</priority>
+    <Name>Парковки для посетителей</Name>
+  </Сategory>
+  <Сategory>
+    <type>Kamping</type>
+    <priority>0</priority>
+    <Name>Кемпинг</Name>
+  </Сategory>
+  <Сategory>
+    <type>Toilets</type>
+    <priority>0</priority>
+    <Name>Туалеты</Name>
+  </Сategory>
+  <Сategory>
+    <type>ForgottenThings</type>
+    <priority>0</priority>
+    <Name>Забытые вещи</Name>
+  </Сategory>
+  <Сategory>
+    <type>EntranceToThePark</type>
+    <priority>0</priority>
+    <Name>Вход в парк</Name>
+  </Сategory>
+</ArrayOfСategory>

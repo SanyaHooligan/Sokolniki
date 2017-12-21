@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BFBE126B-37F1-4C8E-9B34-B43C3BE7674B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Admin</RootNamespace>
+    <AssemblyName>Admin</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Aliases>global</Aliases>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Model\ConvertPicture.cs" />
+    <Compile Include="Model\Diserializer.cs" />
+    <Compile Include="Model\IDiserializer.cs" />
+    <Compile Include="Model\ISerializer.cs" />
+    <Compile Include="Model\Search.cs" />
+    <Compile Include="Model\SerializerCol.cs" />
+    <Compile Include="RelayCommand.cs" />
+    <Compile Include="ViewModel.cs" />
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\Category.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Model\IEditData.cs" />
+    <Compile Include="Model\ISearch.cs" />
+    <Compile Include="Model\MarkItem.cs" />
+    <Compile Include="Model\MarkType.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Resource Include="Fonts\Stolzl_Sokolniki.ttf" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\bm-group-logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\camera.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\case.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\cash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\chainik.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\chair.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\cheburek.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\check.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\chicken.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\creditcard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\disabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\facebook.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\flag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\grid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\hernya.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\house.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\icecream.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\instagram.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\kacheli.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\krevetki.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\list.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\lupa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\mark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\nature.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\nosmoke.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\parking.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\photo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\pizza.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\rabbit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\roll.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\shashlyk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\shavuha.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\shower.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\sport.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\star.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\tent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\time.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\turtle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\twitter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\vk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\vok.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\WC.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\wifi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\logo.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
