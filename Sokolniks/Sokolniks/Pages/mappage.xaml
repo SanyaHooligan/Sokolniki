@@ -13,14 +13,6 @@
         <ViewModel:TestViewModelForSearch/>
     </Page.DataContext>
 
-    <Page.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../ResourceDictionaries/MapResources.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Page.Resources>
-
     <Grid Name="MainGrid" Background="White" Width="1080" Height="1920" Margin="0,0,-2160,0" Opacity="1">
         <Grid.RowDefinitions>
             <RowDefinition Height="513"/>

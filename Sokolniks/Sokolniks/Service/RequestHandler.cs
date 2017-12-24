@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography.X509Certificates;
+using Sokolniks.Pages;
 
 namespace Sokolniks.Service
 {
@@ -25,6 +26,14 @@ namespace Sokolniks.Service
             if (request.Url.Contains("sokolniki.com") && !request.Url.Contains("mailto"))
             {
                 return false;
+            }
+            if (request.Url.Contains(".pdf"))
+            {
+                (App.Current.MainWindow as MainWindow).TheFrame.Content = new PdfPage(request.Url);
+            }
+            if (request.Url.Contains(".doc") || request.Url.Contains(".docx"))
+            {
+                (App.Current.MainWindow as MainWindow).TheFrame.Content = new WordViewer(request.Url);
             }
             return true;
         }

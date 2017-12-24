@@ -37,14 +37,15 @@ namespace Sokolniks.Pages
             InitializeComponent();
             CreateMarkCollection();
             popupcollection = canvasmap.Children.OfType<InfoPopup>();
-            FindEllipses();
             this.Loaded += MapPage_Loaded;
             if (Properties.Resources.FirstTimeOrNot == "0")
             {
+                FindEllipses(true);
                 SerializeMatrixes();
             }
             else
             {
+                FindEllipses(false);
                 DeserializeMatrixes();
             }
         }
@@ -295,10 +296,10 @@ namespace Sokolniks.Pages
             return TagInt;
         }
 
-        private void FindEllipses()
+        private void FindEllipses(bool isfirst)
         {
-
                 ellipseCollection = canvasmap.Children.OfType<Ellipse>();
+            if (!isfirst) return;
             matrix = new Double[ellipseCollection.Count(), ellipseCollection.Count()];
             length = matrix.GetLength(0);
             pathMatrix = new int[length, length];

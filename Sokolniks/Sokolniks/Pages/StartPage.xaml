@@ -8,13 +8,6 @@
       mc:Ignorable="d" 
       d:DesignHeight="1920" d:DesignWidth="1080"
       Title="StartPage">
-    <Page.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../ResourceDictionaries/StartPageResources.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Page.Resources>
     <Page.DataContext>
         <ViewModel:StartPageViewModel/>
     </Page.DataContext>
