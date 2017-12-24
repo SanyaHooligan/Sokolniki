@@ -678,7 +678,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <TextBox Width="959" Height="100" VerticalAlignment="Top"
+                    <TextBox Width="959" Height="100" VerticalAlignment="Top" Text="{Binding Path=TextSearch, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                              TextWrapping="NoWrap" FontSize="70" Foreground="#000000" FontFamily="../Fonts/#Stolzl Display"
                              Panel.ZIndex="1"/>
                     <!--<TextBox Width="959" Height="100" VerticalAlignment="Top" Style="{StaticResource MapSearchfieldTextBox}"

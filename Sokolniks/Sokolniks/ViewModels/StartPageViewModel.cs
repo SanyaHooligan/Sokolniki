@@ -8,16 +8,8 @@ using System.Windows.Threading;
 
 namespace Sokolniks.ViewModels
 {
-    class StartPageViewModel : INotifyPropertyChanged
+    class StartPageViewModel : BaseViewModel
     {
-        #region PropertyChanged Implementation
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void DoPropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-        #endregion
-
         private string _season;
         private string season
         {

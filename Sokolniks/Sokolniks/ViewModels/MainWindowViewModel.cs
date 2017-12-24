@@ -13,20 +13,12 @@ using Newtonsoft.Json.Linq;
 using Sokolniks.Model;
 using System.Windows.Input;
 using System.Windows;
+using BL.Weather;
 
 namespace Sokolniks.ViewModels
 {
-    class MainWindowViewModel : INotifyPropertyChanged
+    class MainWindowViewModel : BaseViewModel
     {
-        #region PropertyChanged Implementation
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void DoPropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-        #endregion
-
         #region Properties
         private Dictionary<int, string> MonthsByKey = new Dictionary<int, string>()
         {
@@ -34,15 +26,16 @@ namespace Sokolniks.ViewModels
             {5, "мая" }, {6, "июня" }, {7, "июля" }, {8, "августа" },
             {9, "сентября" }, {10, "октября" }, {11, "ноября" }, {12, "декабря" },
         };
-        private Dictionary<string, string> WeatherInRussian = new Dictionary<string, string>()
-        {
-            { "cloudy", "облачно" }, { "clear-day", "ясно" }, { "clear-night", "ясно" }, { "rain", "дождь" },
-            { "snow", "снег" }, { "sleet", "джодь\r\nсо снегом" }, { "windy", "ветрено" }, { "fog", "туман" },
-            { "partly-cloudy-day", "переменная\r\nоблачность" }, { "partly-cloudy-night", "переменная\r\nоблачность" },
-        };
+        //private Dictionary<string, string> WeatherInRussian = new Dictionary<string, string>()
+        //{
+        //    { "cloudy", "облачно" }, { "clear-day", "ясно" }, { "clear-night", "ясно" }, { "rain", "дождь" },
+        //    { "snow", "снег" }, { "sleet", "джодь\r\nсо снегом" }, { "windy", "ветрено" }, { "wind", "ветер" }, { "fog", "туман" },
+        //    { "partly-cloudy-day", "переменная\r\nоблачность" }, { "partly-cloudy-night", "переменная\r\nоблачность" },
+        //};
         private DispatcherTimer MinuteTimer = new DispatcherTimer();
         private DispatcherTimer WeatherTimer = new DispatcherTimer();
-        private Weather CurrentWeather = new Weather();
+        //private Weather CurrentWeather = new Weather();
+        private WeatherProcessing weather = new WeatherProcessing();
 
         private string _WorkingHours;
         public string WorkingHours
@@ -116,15 +109,15 @@ namespace Sokolniks.ViewModels
             get { return _WeatherString; }
             set
             {
-                if (WeatherInRussian.ContainsKey(value))
-                    _WeatherString = WeatherInRussian[value];
-                else
+                //if (WeatherInRussian.ContainsKey(value))
+                //    _WeatherString = WeatherInRussian[value];
+                //else
                 _WeatherString = value;
                 DoPropertyChanged("WeatherString");
             }
         }
         #endregion
-
+        
 
         public MainWindowViewModel()
         {
@@ -135,9 +128,11 @@ namespace Sokolniks.ViewModels
             LoadDate();
             try
             {
-                LoadWeather();
+                weather.LoadWeather();
+                WeatherString = weather.WeatherState;
+                TemperatureString = weather.TemperatureValue;
             }
-            catch(WebException ex)
+            catch (WebException ex)
             {
                 MessageBox.Show("Нет подключения к интернету");
             }
@@ -169,25 +164,27 @@ namespace Sokolniks.ViewModels
             DateString = $"{timeNow.Day} {MonthsByKey[timeNow.Month]}";
         }
 
-        private void LoadWeather()
-        {
-            using (WebClient wc = new WebClient())
-            {
-                var json = wc.DownloadString("http://park.sokolniki.com/api/weather/");
-                CurrentWeather = Newtonsoft.Json.JsonConvert.DeserializeObject<Weather>(json);
-            }
-            WeatherString = CurrentWeather.currently.icon;
-            string sign = CurrentWeather.currently.temperature > 0 ? "+" : string.Empty;
-            TemperatureString = sign + $"{(int)CurrentWeather.currently.temperature + 1}" + (char)0xb0;
-        }
+        //private void LoadWeather()
+        //{
+        //    using (WebClient wc = new WebClient())
+        //    {
+        //        var json = wc.DownloadString("http://park.sokolniki.com/api/weather/");
+        //        CurrentWeather = Newtonsoft.Json.JsonConvert.DeserializeObject<Weather>(json);
+        //    }
+        //    WeatherString = CurrentWeather.currently.icon;
+        //    string sign = CurrentWeather.currently.temperature > 0 ? "+" : string.Empty;
+        //    TemperatureString = sign + $"{(int)CurrentWeather.currently.temperature + 1}" + (char)0xb0;
+        //}
 
         private void WeatherTimer_Tick(object sender, EventArgs e)
         {
             try
             {
-                LoadWeather();
+                weather.LoadWeather();
+                WeatherString = weather.WeatherState;
+                TemperatureString = weather.TemperatureValue;
             }
-            catch(WebException ex)
+            catch (WebException ex)
             {
                 MessageBox.Show("Нет подключения к интернету");
             }

@@ -25,21 +25,6 @@
             <RowDefinition/>
             <RowDefinition Height="182"/>
         </Grid.RowDefinitions>
-
-        <!--Погода и дата-->
-        <!--
-        <Grid Grid.Row="0" Margin="64,0,57,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="110"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-
-            <TextBlock Text="+7" Foreground="#FFFFFF" FontSize="40" Grid.Row="0" VerticalAlignment="Bottom" FontFamily="../Fonts/#Stolzl Display"/>
-            <TextBlock Text="дождь" Foreground="#FFFFFF" FontSize="25" Grid.Row="1" VerticalAlignment="Bottom" FontFamily="../Fonts/#Stolzl Display"/>
-            <TextBlock Text="22:45" Foreground="#FFFFFF" FontSize="40" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontFamily="../Fonts/#Stolzl Display"/>
-            <TextBlock Text="4 ноября" Foreground="#FFFFFF" FontSize="25" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontFamily="../Fonts/#Stolzl Display"/>
-        </Grid>-->
-
         <!--Кнопки навигации-->
         <Grid Grid.Row="1" Margin="0,120,0,10">
             <Grid.RowDefinitions>
@@ -62,15 +47,6 @@
                     <Image Source="{Binding MinimapImage}" DataContext="{Binding DataContext, ElementName=MainGrid}" Width="730"/>
                 </StackPanel>
             </Button>
-        </Grid>
-
-        <!--Лого и текст внизу страницы-->
-        <Grid Grid.Row="2" Margin="60,0,60,0">
-            <Image Width="169" Height="110" Source="../Images/logo_white.png" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,0,35">
-                <TextBlock Text="9:00-20:00 ежедневно" FontSize="20" Foreground="#ffffff" FontFamily="../Fonts/#Stolzl Display" HorizontalAlignment="Center"/>
-                <TextBlock Text="+7 499 39-39-222" FontSize="30" Foreground="#ffffff" Margin="0,10,0,0" FontFamily="../Fonts/#Stolzl Display" HorizontalAlignment="Center"/>
-            </StackPanel>
         </Grid>
     </Grid>
 </Page>

@@ -35,7 +35,7 @@ namespace Contracts
         {
             
         }
-        public bool Contein(MarkType type)
+        public bool Contains(MarkType type)
         {
             return this.type.Contains(type);
         }

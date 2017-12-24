@@ -19,36 +19,97 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Image Source="Images/logo.png" HorizontalAlignment="Left"></Image>
-            <Image Source="Images/bm-group-logo.png" HorizontalAlignment="Right" Width="200" Grid.Column="2"></Image>
-        </Grid>
-        <Grid Grid.Row="1" Margin="10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Grid Margin="5">
-                <StackPanel Orientation="Vertical">
-                    <Grid Height="50">
-                        <TextBlock Text="Выберите категорию" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontFamily="Fonts/#Stolzl Display"></TextBlock>
-                    </Grid>
-                    <Grid Height="700">
-                        <ListBox>
+    <Viewbox>
+        <Grid Height="1920" Width="1080">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Image Source="Images/logo.png" HorizontalAlignment="Left"></Image>
+                <Image Source="Images/bm-group-logo.png" HorizontalAlignment="Right" Width="200" Grid.Column="2"></Image>
+            </Grid>
+            <Grid Grid.Row="1" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Margin="5">
+                    <StackPanel Orientation="Vertical">
+                        <Grid Height="50">
+                            <TextBlock Text="Выберите категорию" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontFamily="Fonts/#Stolzl Display"></TextBlock>
+                        </Grid>
+                        <Grid Height="700">
+                            <ListBox>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border BorderBrush="Gray" BorderThickness="0,1,0,0">
+                                            <TextBlock Margin="5" Text="{Binding}" FontSize="20" TextWrapping="Wrap"></TextBlock>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Vertical"/>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                            </ListBox>
+                        </Grid>
+                        <Grid Height="120">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Margin="5" Text="Название категории" FontFamily="Fonts/#Stolzl Display" FontSize="22" VerticalAlignment="Bottom"></TextBlock>
+                            <TextBox Grid.Row="1" Margin="5" AllowDrop="True" TextWrapping="Wrap" FontSize="16"></TextBox>
+                        </Grid>
+                        <Grid>
+                            <Button Width="300" Background="White" Height="50">
+                                <TextBlock Foreground="Black" FontSize="20" FontFamily="Fonts/#Stolzl Display" Text="Сохранить категорию" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Column="1" Margin="5">
+                    <StackPanel Orientation="Vertical">
+                        <Grid Height="50">
+                            <TextBlock Text="Выберите объект" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontFamily="Fonts/#Stolzl Display"></TextBlock>
+                        </Grid>
+                        <ListBox Height="700">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <Border BorderBrush="Gray" BorderThickness="0,1,0,0">
-                                        <TextBlock Margin="5" Text="{Binding}" FontSize="20" TextWrapping="Wrap"></TextBlock>
+                                    <Border Margin="5" BorderBrush="Gray" BorderThickness="1">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="50"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Margin="5" Text="{Binding НазваниеОбъекта}" Foreground="Black" FontSize="20" TextWrapping="Wrap"></TextBlock>
+                                            <ItemsControl Grid.Row="1" ItemsSource="{Binding СписокКатегорийОбъекта}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Border BorderBrush="Gray" BorderThickness="0,1,0,0">
+                                                            <TextBlock Margin="3" Text="{Binding}" FontSize="16" Foreground="Gray" TextWrapping="Wrap"></TextBlock>
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <StackPanel Orientation="Vertical"></StackPanel>
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                            </ItemsControl>
+                                            <Image Source="{Binding КартинкаОбъекта}" Grid.Column="1" Grid.RowSpan="2" Width="40" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
+                                        </Grid>
                                     </Border>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
@@ -58,107 +119,48 @@
                                 </ItemsPanelTemplate>
                             </ListBox.ItemsPanel>
                         </ListBox>
-                    </Grid>
-                    <Grid Height="120">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="40"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <TextBlock Margin="5" Text="Название категории" FontFamily="Fonts/#Stolzl Display" FontSize="22" VerticalAlignment="Bottom"></TextBlock>
-                        <TextBox Grid.Row="1" Margin="5" AllowDrop="True" TextWrapping="Wrap" FontSize="16"></TextBox>
-                    </Grid>
-                    <Grid>
-                        <Button Width="300" Background="White" Height="50">
-                            <TextBlock Foreground="Black" FontSize="20" FontFamily="Fonts/#Stolzl Display" Text="Сохранить категорию" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                        </Button>
-                    </Grid>
-                </StackPanel>
-            </Grid>
-            <Grid Grid.Column="1" Margin="5">
-                <StackPanel Orientation="Vertical">
-                    <Grid Height="50">
-                        <TextBlock Text="Выберите объект" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontFamily="Fonts/#Stolzl Display"></TextBlock>
-                    </Grid>
-                    <ListBox Height="700">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Border Margin="5" BorderBrush="Gray" BorderThickness="1">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition Width="50"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition/>
-                                            <RowDefinition/>
-                                        </Grid.RowDefinitions>
-                                        <TextBlock Margin="5" Text="{Binding НазваниеОбъекта}" Foreground="Black" FontSize="20" TextWrapping="Wrap"></TextBlock>
-                                        <ItemsControl Grid.Row="1" ItemsSource="{Binding СписокКатегорийОбъекта}">
-                                            <ItemsControl.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Border BorderBrush="Gray" BorderThickness="0,1,0,0">
-                                                        <TextBlock Margin="3" Text="{Binding}" FontSize="16" Foreground="Gray" TextWrapping="Wrap"></TextBlock>
-                                                    </Border>
-                                                </DataTemplate>
-                                            </ItemsControl.ItemTemplate>
-                                            <ItemsControl.ItemsPanel>
-                                                <ItemsPanelTemplate>
-                                                    <StackPanel Orientation="Vertical"></StackPanel>
-                                                </ItemsPanelTemplate>
-                                            </ItemsControl.ItemsPanel>
-                                        </ItemsControl>
-                                        <Image Source="{Binding КартинкаОбъекта}" Grid.Column="1" Grid.RowSpan="2" Width="40" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                        <ListBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Vertical"/>
-                            </ItemsPanelTemplate>
-                        </ListBox.ItemsPanel>
-                    </ListBox>
-                    <Grid Height="120">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="40"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <TextBlock Margin="5" Text="Название объекта" FontFamily="Fonts/#Stolzl Display" FontSize="22" VerticalAlignment="Bottom"></TextBlock>
-                        <TextBox Grid.Row="1" Margin="5" AllowDrop="True" TextWrapping="Wrap" FontSize="16"></TextBox>
-                    </Grid>
-                    <Grid >
-                        <Button Width="300" Background="White" Height="50">
-                            <TextBlock Foreground="Black" FontSize="20" FontFamily="Fonts/#Stolzl Display" Text="Сохранить название" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                        </Button>
-                    </Grid>
-                    <Grid Height="400" Margin="0,20,0,0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="40"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <TextBlock Margin="5" Text="Иконка объекта" FontFamily="Fonts/#Stolzl Display" FontSize="22" VerticalAlignment="Bottom"></TextBlock>
-                        <ListBox Grid.Row="1" Name="IconsListBox">
-                            <ListBox.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel AllowDrop="True" Orientation="Horizontal" MaxWidth="{Binding ElementName=IconsListBox, Path=ActualWidth}"></WrapPanel>
-                                </ItemsPanelTemplate>
-                            </ListBox.ItemsPanel>
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <Border Margin="5" Width="100" Height="100" BorderBrush="Gray" BorderThickness="1">
-                                        <Image Width="80" Height="80" Source="{Binding}"></Image>
-                                    </Border>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
-                    </Grid>
-                    <Grid Margin="0,10,0,0">
-                        <Button Width="300" Background="White" Height="50">
-                            <TextBlock Foreground="Black" FontSize="20" FontFamily="Fonts/#Stolzl Display" Text="Сохранить иконку" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                        </Button>
-                    </Grid>
-                </StackPanel>
+                        <Grid Height="120">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Margin="5" Text="Название объекта" FontFamily="Fonts/#Stolzl Display" FontSize="22" VerticalAlignment="Bottom"></TextBlock>
+                            <TextBox Grid.Row="1" Margin="5" AllowDrop="True" TextWrapping="Wrap" FontSize="16"></TextBox>
+                        </Grid>
+                        <Grid >
+                            <Button Width="300" Background="White" Height="50">
+                                <TextBlock Foreground="Black" FontSize="20" FontFamily="Fonts/#Stolzl Display" Text="Сохранить название" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            </Button>
+                        </Grid>
+                        <Grid Height="400" Margin="0,20,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Margin="5" Text="Иконка объекта" FontFamily="Fonts/#Stolzl Display" FontSize="22" VerticalAlignment="Bottom"></TextBlock>
+                            <ListBox Grid.Row="1" Name="IconsListBox">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel AllowDrop="True" Orientation="Horizontal" MaxWidth="{Binding ElementName=IconsListBox, Path=ActualWidth}"></WrapPanel>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Margin="5" Width="100" Height="100" BorderBrush="Gray" BorderThickness="1">
+                                            <Image Width="80" Height="80" Source="{Binding}"></Image>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Grid>
+                        <Grid Margin="0,10,0,0">
+                            <Button Width="300" Background="White" Height="50">
+                                <TextBlock Foreground="Black" FontSize="20" FontFamily="Fonts/#Stolzl Display" Text="Сохранить иконку" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
             </Grid>
         </Grid>
-    </Grid>
+    </Viewbox>
 </Window>

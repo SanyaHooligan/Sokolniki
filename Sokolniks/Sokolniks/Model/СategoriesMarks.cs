@@ -16,19 +16,19 @@ namespace Sokolniks.Model
    public class СategoriesMarks : ISearch
     {
         public Map map;
-        public static List<Сategory> Catefories;
+        public static List<Сategory> Categories;
         public СategoriesMarks()
         {
             map = new Map();
-            Catefories = map.Categories;
+            Categories = map.Categories;
             ininCategory();
        
         }
         public void ininCategory()
         {
-            for (int i = 0; i < Catefories.Count; i++)
+            for (int i = 0; i < Categories.Count; i++)
             {
-                Catefories[i].Marks = map.Marks.Where(p => p.Contein(Catefories[i].type)).ToList();
+                Categories[i].Marks = map.Marks.Where(p => p.Contains(Categories[i].type)).ToList();
             }
         }
 
@@ -56,12 +56,12 @@ namespace Sokolniks.Model
 
         public ObservableCollection<Сategory> GetCategories()
         {
-            return new ObservableCollection<Сategory>(Catefories);
+            return new ObservableCollection<Сategory>(Categories);
         }
 
         public ObservableCollection<Сategory> GetTopCategories()
         {
-            return new ObservableCollection<Сategory>(Catefories.OrderByDescending(p => p.priority).Take(7));
+            return new ObservableCollection<Сategory>(Categories.OrderByDescending(p => p.priority).Take(7));
         }
 
         public ObservableCollection<Сategory> GetCategories(string text)
@@ -100,7 +100,7 @@ namespace Sokolniks.Model
 
         public List<Сategory> GetCategoriestt(string text)
         {
-            List<Сategory> listCat = Catefories.Where(p => p.Name.ToLower().Contains(text.ToLower())&p.Marks.Count>0).ToList();
+            List<Сategory> listCat = Categories.Where(p => p.Name.ToLower().Contains(text.ToLower())&p.Marks.Count>0).ToList();
             List<MarkItem> listMark = map.Marks.Where(p => p.MarkName.ToLower().Contains(text.ToLower()) && p.access == true).ToList();
             for (int i=0;i<listMark.Count; i++)
             {

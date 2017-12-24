@@ -39,38 +39,54 @@ namespace Sokolniks.Pages
             popupcollection = canvasmap.Children.OfType<InfoPopup>();
             FindEllipses();
             this.Loaded += MapPage_Loaded;
-            BinaryFormatter formatter = new BinaryFormatter();
-            //using (FileStream fs = new FileStream("matrix.xml", FileMode.OpenOrCreate))
-            //{
-            //    formatter.Serialize(fs, matrix);
-            //}
-            //formatter = new BinaryFormatter();
-            //using (FileStream fs = new FileStream("weightMatrix.xml", FileMode.OpenOrCreate))
-            //{
-            //    formatter.Serialize(fs, weightMatrix);
-            //}
-            //formatter = new BinaryFormatter();
-            //using (FileStream fs = new FileStream("pathMatrix.xml", FileMode.OpenOrCreate))
-            //{
-            //    formatter.Serialize(fs, pathMatrix);
-            //}
+            if (Properties.Resources.FirstTimeOrNot == "0")
+            {
+                SerializeMatrixes();
+            }
+            else
+            {
+                DeserializeMatrixes();
+            }
+        }
 
-            formatter = new BinaryFormatter();
+        private void DeserializeMatrixes()
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
             using (FileStream fs = new FileStream("matrix.xml", FileMode.Open))
             {
-                matrix= (Double[,])formatter.Deserialize(fs) ;
+                matrix = (Double[,])formatter.Deserialize(fs);
             }
             formatter = new BinaryFormatter();
             using (FileStream fs = new FileStream("weightMatrix.xml", FileMode.Open))
             {
                 weightMatrix = (Double[,])formatter.Deserialize(fs);
             }
-                formatter = new BinaryFormatter();
-                using (FileStream fs = new FileStream("pathMatrix.xml", FileMode.Open))
+            formatter = new BinaryFormatter();
+            using (FileStream fs = new FileStream("pathMatrix.xml", FileMode.Open))
             {
-                    pathMatrix= (int[,])formatter.Deserialize(fs);
+                pathMatrix = (int[,])formatter.Deserialize(fs);
             }
         }
+
+        private void SerializeMatrixes()
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            using (FileStream fs = new FileStream("matrix.xml", FileMode.OpenOrCreate))
+            {
+                formatter.Serialize(fs, matrix);
+            }
+            formatter = new BinaryFormatter();
+            using (FileStream fs = new FileStream("weightMatrix.xml", FileMode.OpenOrCreate))
+            {
+                formatter.Serialize(fs, weightMatrix);
+            }
+            formatter = new BinaryFormatter();
+            using (FileStream fs = new FileStream("pathMatrix.xml", FileMode.OpenOrCreate))
+            {
+                formatter.Serialize(fs, pathMatrix);
+            }
+        }
+
         public IEnumerable<InfoPopup> popupcollection;
         const double CANVASMAPHEIGHT = 1407;
         //private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -283,62 +299,62 @@ namespace Sokolniks.Pages
         {
 
                 ellipseCollection = canvasmap.Children.OfType<Ellipse>();
-            //matrix = new Double[ellipseCollection.Count(), ellipseCollection.Count()];
-            //length = matrix.GetLength(0);
-            //pathMatrix = new int[length, length];
+            matrix = new Double[ellipseCollection.Count(), ellipseCollection.Count()];
+            length = matrix.GetLength(0);
+            pathMatrix = new int[length, length];
+            for (int i = 0; i < length; i++)
+            {
+                for (int j = 0; j < length; j++)
+                {
+                    if (i == j) matrix[i, j] = 0;
+                    else matrix[i, j] = INF;
+                    pathMatrix[i, j] = j;
+                }
+            }
+            foreach (var item in ellipseCollection)
+            {
+                List<String> tags = item.Tag.ToString().Split(',').ToList();
+                int first = 0;
+                bool flag = int.TryParse(tags[0], out first);
+                if (!flag) throw new NullReferenceException("не удалось преобразовать первый элемент в int");
+                //if (first == 6)
+                //{
+
+                //}
+                tags.RemoveAt(0);
+                foreach (var tag in tags)
+                {
+                    int TagInt = 0;
+                    bool TagFlag = int.TryParse(tag, out TagInt);
+                    if (!TagFlag) throw new NullReferenceException("не удалось преобразовать элемент в int");
+                    matrix[first - 1, TagInt - 1] = GetLegthBetweenEllipses(FindTag(first), FindTag(TagInt));
+                }
+            }
             //for (int i = 0; i < length; i++)
             //{
             //    for (int j = 0; j < length; j++)
             //    {
-            //        if (i == j) matrix[i, j] = 0;
-            //        else matrix[i, j] = INF;
-            //        pathMatrix[i, j] = j;
+            //        Debug.Write(matrix[i, j] + "        ");
             //    }
+            //    Debug.WriteLine("");
             //}
-            //foreach (var item in ellipseCollection)
-            //{
-            //    List<String> tags = item.Tag.ToString().Split(',').ToList();
-            //    int first = 0;
-            //    bool flag = int.TryParse(tags[0], out first);
-            //    if (!flag) throw new NullReferenceException("не удалось преобразовать первый элемент в int");
-            //    //if (first == 6)
-            //    //{
-
-            //    //}
-            //    tags.RemoveAt(0);
-            //    foreach (var tag in tags)
-            //    {
-            //        int TagInt = 0;
-            //        bool TagFlag = int.TryParse(tag, out TagInt);
-            //        if (!TagFlag) throw new NullReferenceException("не удалось преобразовать элемент в int");
-            //        matrix[first - 1, TagInt - 1] = GetLegthBetweenEllipses(FindTag(first), FindTag(TagInt));
-            //    }
-            //}
-            ////for (int i = 0; i < length; i++)
-            ////{
-            ////    for (int j = 0; j < length; j++)
-            ////    {
-            ////        Debug.Write(matrix[i, j] + "        ");
-            ////    }
-            ////    Debug.WriteLine("");
-            ////}
-            //weightMatrix = matrix;
-            ////создание матрицы растояний между всеми элементами и матрицы предков
-            //for (int k = 0; k < length; k++)
-            //{
-            //    for (int i = 0; i < length; i++)
-            //    {
-            //        for (int j = 0; j < length; j++)
-            //        {
-            //            double min = weightMatrix[i, k] + weightMatrix[k, j];
-            //            if (weightMatrix[i, j] > min)
-            //            {
-            //                weightMatrix[i, j] = min;
-            //                pathMatrix[i, j] = pathMatrix[i, k];
-            //            }
-            //        }
-            //    }
-            //}
+            weightMatrix = matrix;
+            //создание матрицы растояний между всеми элементами и матрицы предков
+            for (int k = 0; k < length; k++)
+            {
+                for (int i = 0; i < length; i++)
+                {
+                    for (int j = 0; j < length; j++)
+                    {
+                        double min = weightMatrix[i, k] + weightMatrix[k, j];
+                        if (weightMatrix[i, j] > min)
+                        {
+                            weightMatrix[i, j] = min;
+                            pathMatrix[i, j] = pathMatrix[i, k];
+                        }
+                    }
+                }
+            }
         }
 
         private Double GetLegthBetweenPoints(Point start, Point end)

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Sokolniks.ViewModels
 {
     enum Season { summer, winter, autumn }
-    class TestViewModelForSearch : INotifyPropertyChanged
+    class TestViewModelForSearch : BaseViewModel
     {
         public ISearch map;
         public TestViewModelForSearch()
@@ -19,9 +19,6 @@ namespace Sokolniks.ViewModels
             map = new СategoriesMarks();
             CheckSeason();
         }
-
-
-
         private ObservableCollection<MarkItem> marksForSearch;
         public ObservableCollection<MarkItem> MarksForSearch
         {
@@ -33,7 +30,7 @@ namespace Sokolniks.ViewModels
             set
             {
                 marksForSearch = value;
-                DoProperyChanged("MarksForSearch");
+                DoPropertyChanged("MarksForSearch");
             }
         }
 
@@ -49,7 +46,7 @@ namespace Sokolniks.ViewModels
             set
             {
                 categorisForSearch = value;
-                DoProperyChanged("CategorisForSearch");
+                DoPropertyChanged("CategorisForSearch");
             }
 
         }
@@ -66,7 +63,7 @@ namespace Sokolniks.ViewModels
             set
             {
                 categories = value;
-                DoProperyChanged("Categories");
+                DoPropertyChanged("Categories");
             }
         }
 
@@ -111,7 +108,7 @@ namespace Sokolniks.ViewModels
                     MarksForSearch = map.GetMarks(textSearch);
                 }
 
-                DoProperyChanged("TextSearch");
+                DoPropertyChanged("TextSearch");
             }
         }
 
@@ -123,7 +120,7 @@ namespace Sokolniks.ViewModels
             {
                 _MapImageSource = value;
                 CheckSeason();
-                DoProperyChanged("MapImageSource");
+                DoPropertyChanged("MapImageSource");
             }
         }
         private void ToggleSeason(Season currentSeason)
@@ -175,16 +172,6 @@ namespace Sokolniks.ViewModels
             CategorisForSearch?.Clear();
             MarksForSearch?.Clear();
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void DoProperyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
-
-
+        
     }
 }

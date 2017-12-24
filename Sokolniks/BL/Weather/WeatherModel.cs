@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sokolniks.Model
+namespace BL.Weather
 {
     public class Currently
     {
-        
+
         public int time { get; set; }
         public string summary { get; set; }
         public string icon { get; set; }

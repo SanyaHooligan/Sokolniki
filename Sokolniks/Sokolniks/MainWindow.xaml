@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Sokolniks"
         xmlns:ViewModel="clr-namespace:Sokolniks.ViewModels"
         xmlns:controls="clr-namespace:Sokolniks.Controls"
-        xmlns:keyboard="clr-namespace:SimpleKeyboard;assembly=SimpleKeyboard"
+        xmlns:converters="clr-namespace:Sokolniks.Converters"
+        xmlns:contracts="clr-namespace:Contracts;assembly=Contracts"
         mc:Ignorable="d"
         Title="MainWindow" Height="1920" Width="1080"
         WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
@@ -15,6 +16,9 @@
         <ViewModel:MainWindowViewModel/>
     </Window.DataContext>
     <Window.Resources>
+        <converters:StartPageForegroundConverter x:Key="ToColorConverter"></converters:StartPageForegroundConverter>
+        <converters:StartPageImageConverter x:Key="ToImageConverter"></converters:StartPageImageConverter>
+        <converters:BoolToVisbilityConverter x:Key="ToVisibilityConverter"></converters:BoolToVisbilityConverter>
         <Style x:Key="LoadingGridStyle" TargetType="Grid">
             <Style.Triggers>
                 <Trigger Property="Visibility" Value="Visible">
@@ -29,8 +33,8 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
-        <Grid>
+    <Viewbox>
+        <Grid Height="1920" Width="1080">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1920"/>
                 <RowDefinition Height="Auto"/>
@@ -41,7 +45,7 @@
                     <RowDefinition Height="1558"/>
                     <RowDefinition Height="182"/>
                 </Grid.RowDefinitions>
-                <Frame Grid.RowSpan="3" Name="TheFrame" Navigating="TheFrame_Navigating" ContentRendered="TheFrame_ContentRendered" Source="{Binding Source}" Height="1920" Width="1080" NavigationUIVisibility="Hidden"/>
+                <Frame Grid.RowSpan="3" Name="TheFrame" Navigating="TheFrame_Navigating" Source="{Binding Source}" Height="1920" Width="1080" NavigationUIVisibility="Hidden"/>
 
                 <!--Погода и дата-->
                 <Grid Grid.Row="0" Margin="64,0,57,0">
@@ -51,27 +55,36 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Name="TemperatureValue" Text="{Binding TemperatureString}" Foreground="White" FontSize="40" Grid.Row="0" VerticalAlignment="Bottom" FontFamily="../Fonts/#Stolzl Display"/>
-                    <TextBlock Name="WeatherDescription" Text="{Binding WeatherString}" Foreground="White" FontSize="25" Grid.Row="1" Grid.RowSpan="2" VerticalAlignment="Top" FontFamily="../Fonts/#Stolzl Display" Margin="0,6,0,0"/>
-                    <TextBlock Name="CurrentTime" Text="{Binding TimeString}" Foreground="White" FontSize="40" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontFamily="../Fonts/#Stolzl Display"/>
-                    <TextBlock Name="Date" Text="{Binding DateString}" Foreground="White" FontSize="25" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontFamily="../Fonts/#Stolzl Display"/>
+                    <TextBlock Name="TemperatureValue" Text="{Binding TemperatureString}" Foreground="{Binding Source={x:Static contracts:Session.CurrentSession}, Path=IsStartPage, Converter={StaticResource ToColorConverter}}" FontSize="40" Grid.Row="0" VerticalAlignment="Bottom" FontFamily="../Fonts/#Stolzl Display"></TextBlock>
+                    <TextBlock Name="WeatherDescription" Text="{Binding WeatherString}" Foreground="{Binding Source={x:Static contracts:Session.CurrentSession}, Path=IsStartPage, Converter={StaticResource ToColorConverter}}" FontSize="25" Grid.Row="1" Grid.RowSpan="2" VerticalAlignment="Top" FontFamily="../Fonts/#Stolzl Display" Margin="0,6,0,0"/>
+                    <TextBlock Name="CurrentTime" Text="{Binding TimeString}" Foreground="{Binding Source={x:Static contracts:Session.CurrentSession}, Path=IsStartPage, Converter={StaticResource ToColorConverter}}" FontSize="40" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontFamily="../Fonts/#Stolzl Display"/>
+                    <TextBlock Name="Date" Text="{Binding DateString}" Foreground="{Binding Source={x:Static contracts:Session.CurrentSession}, Path=IsStartPage, Converter={StaticResource ToColorConverter}}" FontSize="25" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontFamily="../Fonts/#Stolzl Display"/>
                 </Grid>
 
                 <!--Лого и текст внизу страницы-->
                 <Grid Grid.Row="2" Margin="60,0,60,0">
-                    <Image Name="LogoImage" Width="169" Height="110" Source="/Images/logo_white.png" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    <Image Name="LogoImage" Width="169" Height="110" Source="{Binding Source={x:Static contracts:Session.CurrentSession}, Path=IsStartPage, Converter={StaticResource ToImageConverter}}" VerticalAlignment="Top" HorizontalAlignment="Left"></Image>
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,0,35">
-                        <TextBlock Name="ScheduleText" Text="{Binding WorkingHours, UpdateSourceTrigger=PropertyChanged}" FontSize="20" Foreground="White" FontFamily="../Fonts/#Stolzl Display" HorizontalAlignment="Center"/>
-                        <TextBlock Name="PhoneNumberText" Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" FontSize="30" Foreground="White" Margin="0,10,0,0" FontFamily="../Fonts/#Stolzl Display" HorizontalAlignment="Center"/>
+                        <TextBlock Name="ScheduleText" Foreground="{Binding Source={x:Static contracts:Session.CurrentSession}, Path=IsStartPage, Converter={StaticResource ToColorConverter}}" Text="{Binding WorkingHours, UpdateSourceTrigger=PropertyChanged}" FontSize="20" FontFamily="../Fonts/#Stolzl Display" HorizontalAlignment="Center"/>
+                        <TextBlock Name="PhoneNumberText" Foreground="{Binding Source={x:Static contracts:Session.CurrentSession}, Path=IsStartPage, Converter={StaticResource ToColorConverter}}" Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" FontSize="30" Margin="0,10,0,0" FontFamily="../Fonts/#Stolzl Display" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Grid>
-                <Grid Name="spiinerGrid" Width="1080" Height="1920" Visibility="Collapsed" Background="White" Grid.RowSpan="3" VerticalAlignment="Top">
-                    <controls:Spinner HorizontalAlignment="Center" Width="100" Height="100" VerticalAlignment="Center"></controls:Spinner>
+                <Grid Name="spiinerGrid" Width="1080" Height="1920" Background="White" Grid.RowSpan="3" VerticalAlignment="Top">
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Source={x:Static contracts:Session.CurrentSession}, Path=IsLoading}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Source={x:Static contracts:Session.CurrentSession}, Path=IsLoading}" Value="False">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                    <controls:Spinner HorizontalAlignment="Center" Visibility="{Binding Source={x:Static contracts:Session.CurrentSession}, Path=IsLoading, Converter={StaticResource ToVisibilityConverter}}" Width="300" Height="300" VerticalAlignment="Center"></controls:Spinner>
                 </Grid>
             </Grid>
-            <Grid Grid.Row="1">
-                <keyboard:SimpleKeyboardControl Name="Keyboard" FontFamily="../Fonts/#Stolzl Display" KeyWidth="80" KeyHeight="80" KeyColor="Black" KeyBackground="White" KeyBorderBrush="Black" KeyCornerRadius="0"></keyboard:SimpleKeyboardControl>
-            </Grid>
         </Grid>
-    </ScrollViewer>
+    </Viewbox>
 </Window>
