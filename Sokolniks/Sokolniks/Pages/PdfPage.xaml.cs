@@ -1,4 +1,5 @@
-﻿using MoonPdfLib.MuPdf;
+﻿using MoonPdfLib;
+using MoonPdfLib.MuPdf;
 using Sokolniks.Commands;
 using System;
 using System.Collections.Generic;
@@ -59,10 +60,13 @@ namespace Sokolniks.Pages
             }
 
             //public String SpinnerVisibility { get; set; }
-
+                
             private void OpenPdf()
             {
-
+            MoonPdfPanel PdfPanel = new MoonPdfPanel();
+            PdfPanel.Margin = new Thickness(50, 0, 50, 50);
+            Grid.SetRow(PdfPanel, 1);
+            MainGrid.Children.Add(PdfPanel);
                 try
                 {
                     PdfPanel.Open(new MemorySource(new WebClient().DownloadData(Uri)));

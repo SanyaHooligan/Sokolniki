@@ -24,6 +24,6 @@
             <TextBlock Text="PDF-документ" Foreground="#000000" FontSize="60" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="../Fonts/#Stolzl Display"/>
         </Grid>
 
-        <moonpdf:MoonPdfPanel Name="PdfPanel" Grid.Row="1" Margin="0,0,0,50"/>
+        <!--<moonpdf:MoonPdfPanel Name="PdfPanel" Grid.Row="1" Margin="0,0,0,50"/>-->
     </Grid>
 </Page>

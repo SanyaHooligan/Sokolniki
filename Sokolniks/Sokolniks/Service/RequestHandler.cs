@@ -29,7 +29,8 @@ namespace Sokolniks.Service
             }
             if (request.Url.Contains(".pdf"))
             {
-                (App.Current.MainWindow as MainWindow).TheFrame.Content = new PdfPage(request.Url);
+                //(App.Current.MainWindow as MainWindow).TheFrame.Content = new PdfPage(request.Url);
+                return false;
             }
             if (request.Url.Contains(".doc") || request.Url.Contains(".docx"))
             {
