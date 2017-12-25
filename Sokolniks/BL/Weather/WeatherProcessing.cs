@@ -57,7 +57,7 @@ namespace BL.Weather
                     var json = wc.DownloadString("http://park.sokolniki.com/api/weather/");
                     CurrentWeather = Newtonsoft.Json.JsonConvert.DeserializeObject<Weather>(json);
                 }
-                catch{ }
+                catch{ return; }
             }
             WeatherState = CurrentWeather.currently.icon;
             string sign = CurrentWeather.currently.temperature > 0 ? "+" : string.Empty;

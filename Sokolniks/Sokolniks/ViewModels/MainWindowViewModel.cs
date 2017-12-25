@@ -136,6 +136,10 @@ namespace Sokolniks.ViewModels
             {
                 MessageBox.Show("Нет подключения к интернету");
             }
+            catch(Exception ex)
+            {
+
+            }
             WeatherTimer.Interval = new TimeSpan(0, 10, 0);
             WeatherTimer.Tick += WeatherTimer_Tick;
             WeatherTimer.Start();
@@ -187,6 +191,10 @@ namespace Sokolniks.ViewModels
             catch (WebException ex)
             {
                 MessageBox.Show("Нет подключения к интернету");
+            }
+            catch(Exception ex)
+            {
+
             }
         }
     }
