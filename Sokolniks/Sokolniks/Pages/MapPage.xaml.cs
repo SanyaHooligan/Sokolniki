@@ -529,16 +529,16 @@ namespace Sokolniks.Pages
             ListMarks.SelectedIndex = -1;
         }
 
-        private void Popular_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (PopularListBox.SelectedIndex != -1)
-            {
-                HideAllPopups();
-                Сategory popular = PopularListBox.SelectedItem as Сategory;
-                ShowCategory(popular);
-            }
-            PopularListBox.SelectedIndex = -1;
-        }
+        //private void Popular_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    if (PopularListBox.SelectedIndex != -1)
+        //    {
+        //        HideAllPopups();
+        //        Сategory popular = PopularListBox.SelectedItem as Сategory;
+        //        ShowCategory(popular);
+        //    }
+        //    PopularListBox.SelectedIndex = -1;
+        //}
 
         private void ListCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

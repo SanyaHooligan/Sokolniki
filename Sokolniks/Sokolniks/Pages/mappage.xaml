@@ -739,7 +739,7 @@
                                 </ListBox>
                             </TabItem.Content>
                         </TabItem>
-                        <TabItem x:Name="Popular">
+                        <!--<TabItem x:Name="Popular">
                             <TabItem.Template>
                                 <ControlTemplate TargetType="{x:Type TabItem}">
                                     <Grid>
@@ -775,7 +775,7 @@
                             </TabItem.Header>
                             <TabItem.Content>
                                 <ListBox Name="PopularListBox" SelectionChanged="Popular_SelectionChanged" Grid.Row="1" Panel.ZIndex="1" BorderThickness="0" ItemsSource="{Binding PopularCategorise}" Margin="0,40,0,0" >
-                                    <!--ItemContainerStyle="{StaticResource ListBoxItemsTemplate}"-->
+                                    --><!--ItemContainerStyle="{StaticResource ListBoxItemsTemplate}"--><!--
                                     <ListBox.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <StackPanel>
@@ -799,7 +799,7 @@
                                     </ListBox.ItemTemplate>
                                 </ListBox>
                             </TabItem.Content>
-                        </TabItem>
+                        </TabItem>-->
                     </TabControl>
                 </Grid>
                 <Grid Name="listGrid" Height="Auto" Margin="0,93,0,0" VerticalAlignment="Top">
