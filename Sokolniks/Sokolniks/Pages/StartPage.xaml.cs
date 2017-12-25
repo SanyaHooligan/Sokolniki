@@ -74,6 +74,7 @@ namespace Sokolniks.Pages
 
         private void Anim_Completed_Web(object sender, EventArgs e)
         {
+            //NavigationService?.Navigate(new WordViewer("Отчет.docx"));
             NavigationService?.Navigate(new WebPage());
         }
     }

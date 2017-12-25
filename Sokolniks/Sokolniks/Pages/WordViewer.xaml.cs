@@ -28,7 +28,21 @@ namespace Sokolniks.Pages
         public WordViewer(String link)
         {
             InitializeComponent();
-            IDocProcessing doc = new DocLoader(link, true, rrr);
+            try
+            {
+                IDocProcessing doc = new DocLoader(link, true, rrr);
+            }
+            catch
+            {
+                try
+                {
+                    IDocProcessing doc = new DocOpener(link, true, rrr);
+                }
+                catch
+                {
+                    NavigationService?.GoBack();
+                }
+            }
         }
     }
 }
